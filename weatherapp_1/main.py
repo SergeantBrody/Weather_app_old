@@ -7,6 +7,8 @@ from utils import request_from_weather_api, get_data_from_file
 print("Welcome to the app which will let you check if certain day is rainy day or not")
 
 file_handler = FileHandler("weather_data.json")
+if file_handler.data is None:
+    exit()
 print(file_handler.data)
 
 address = input("Provide the city in order to check the weather: ")

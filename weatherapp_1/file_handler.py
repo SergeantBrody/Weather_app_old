@@ -7,8 +7,15 @@ class FileHandler:
         self.data = self.load_data_from_file()
 
     def load_data_from_file(self):
-        with open(self.file) as file:
-            return json.loads(file.read())
+        try:
+            with open(self.file) as file:
+                return json.loads(file.read())
+        except FileNotFoundError:
+            print(f"File '{self.file}' not found.")
+            self.data = None
+        except json.JSONDecodeError:
+            print(f"File '{self.file}' has invalid JSON format.")
+            self.data = None
 
     def save_data_to_file(self):
         with open(self.file, mode="w") as file:
